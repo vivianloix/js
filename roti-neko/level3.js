@@ -57,8 +57,8 @@ create() {
     //coinLayer = map.createDynamicLayer('coinLayer', coinTiles, 0, 0);
 
     // create the player sprite    
-    this.player = this.physics.add.sprite(200, 200, 'fiji');
-    this.player = this.physics.add.sprite(200, 200, 'violet');
+    // this.player = this.physics.add.sprite(200, 200, 'fiji');
+    // this.player = this.physics.add.sprite(200, 200, 'violet');
     this.player = this.physics.add.sprite(200, 200, 'tangy');
     this.player.setBounce(0.1); // our this.player will bounce from items
     
