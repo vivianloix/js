@@ -79,7 +79,7 @@ create() {
     this.player.setCollideWorldBounds(true); // don't go out of the map  
 
     // Set this.player to starting position
-    //this.player.setPosition(this.startPoint2.x, this.startPoint2.y);  
+    this.player.setPosition(70, 70);  
 
     console.log('violet', this.player.x, this.player.y);
 
@@ -141,7 +141,7 @@ create() {
     //this.physics.add.collider(this.groundLayer, this.poop);
 
     //this.physics.add.overlap(this.stars, this.bombs, this.removeBombs, null, this );
-    this.physics.add.overlap(this.player, this.snacks1,this.snacks2, this.collectSnack1, this.collectSnack2,null, this );
+    this.physics.add.overlap(this.player, this.snacks1, this.collectsnack1, null, this );
     this.physics.add.overlap(this.player, this.crab, this.hitCrab, null, this );
 
     this.add.text(20,20, 'Beach Day', { font: '21px Courier', fill: '#221C48' }).setScrollFactor(0);
@@ -212,11 +212,11 @@ create() {
 
 }
 
-collectSnack1(player, snacks1) {
+collectsnack1(player, snacks1) {
     snacks1.disableBody(true, true);
     this.snackCount += 1; // add 10 points to the score
     console.log(this.snackCount);
-    //this.snackText.setText(this.snackCount); // set the text to show the current score
+    this.snackText.setText(this.snackCount); // set the text to show the current score
     return false;
 }
 

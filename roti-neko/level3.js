@@ -67,7 +67,7 @@ create() {
     this.player.setCollideWorldBounds(true); // don't go out of the map  
 
     // Set this.player to starting position
-    this.player.setPosition(0, 0);  
+    this.player.setPosition(70, 70);  
 
     console.log('player ', this.player.x, this.player.y);
 
