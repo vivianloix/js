@@ -131,14 +131,14 @@ create() {
 
     // });
     
-    this.physics.add.collider(this.poop, this.player);
+    //this.physics.add.collider(this.poop, this.player);
 
     this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.moveLeft, callbackScope: this, loop: true });
     this.timedEvent2 = this.time.addEvent({ delay: 2000, callback: this.moveRight, callbackScope: this, loop: true }); 
 
     // Collide platform with enemy
     this.physics.add.collider(this.groundLayer, this.crab);
-    this.physics.add.collider(this.groundLayer, this.poop);
+    //this.physics.add.collider(this.groundLayer, this.poop);
 
     //this.physics.add.overlap(this.stars, this.bombs, this.removeBombs, null, this );
     this.physics.add.overlap(this.player, this.snacks1,this.snacks2, this.collectSnack1, this.collectSnack2,null, this );
@@ -156,34 +156,34 @@ create() {
     this.snackText.setScrollFactor(0);
     this.snackText.visible = true;
 
-    //fiji
-    this.anims.create({
-        key: 'fiji',
-        frames: [{key: 'fiji', frame: 'fiji_01'}],
-        frameRate: 10,
-    });
+    // //fiji
+    // this.anims.create({
+    //     key: 'fiji',
+    //     frames: [{key: 'fiji', frame: 'fiji_01'}],
+    //     frameRate: 10,
+    // });
 
-    // Create the walking animation with prefix of fiji
-    this.anims.create({
-        key: 'fijiwalk',
-        frames: this.anims.generateFrameNames('fiji', {prefix: 'fiji_', start: 2, end: 9, zeroPad: 2}),
-        frameRate: 7,
-        repeat: -1
-    });
+    // // Create the walking animation with prefix of fiji
+    // this.anims.create({
+    //     key: 'fijiwalk',
+    //     frames: this.anims.generateFrameNames('fiji', {prefix: 'fiji_', start: 2, end: 9, zeroPad: 2}),
+    //     frameRate: 7,
+    //     repeat: -1
+    // });
 
-    //violet
-    this.anims.create({
-        key: 'violet',
-        frames: [{key: 'violet', frame: 'violet_01'}],
-        frameRate: 10,
-    });
+    // //violet
+    // this.anims.create({
+    //     key: 'violet',
+    //     frames: [{key: 'violet', frame: 'violet_01'}],
+    //     frameRate: 10,
+    // });
 
-    this.anims.create({
-        key: 'violetwalk',
-        frames: this.anims.generateFrameNames('violet', {prefix: 'violet_', start: 2, end: 9, zeroPad: 2}),
-        frameRate: 7,
-        repeat: -1
-    });
+    // this.anims.create({
+    //     key: 'violetwalk',
+    //     frames: this.anims.generateFrameNames('violet', {prefix: 'violet_', start: 2, end: 9, zeroPad: 2}),
+    //     frameRate: 7,
+    //     repeat: -1
+    // });
 
     //tangy
     this.anims.create({
@@ -268,22 +268,22 @@ update() {
     if (this.cursors.left.isDown)
     {
         this.player.body.setVelocityX(-200);
-        this.player.anims.play('fijiwalk', true); // walk left
-        this.player.anims.play('violetwalk', true);
+        // this.player.anims.play('fijiwalk', true); // walk left
+        // this.player.anims.play('violetwalk', true);
         this.player.anims.play('tangywalk', true);
         this.player.flipX = true; // flip the sprite to the left
     }
     else if (this.cursors.right.isDown)
     {
         this.player.body.setVelocityX(200);
-        this.player.anims.play('fijiwalk', true);
-        this.player.anims.play('violetwalk', true);
+        // this.player.anims.play('fijiwalk', true);
+        // this.player.anims.play('violetwalk', true);
         this.player.anims.play('tangywalk', true);
         this.player.flipX = false; // use the original sprite looking to the right
     } else {
         this.player.body.setVelocityX(0);
-        this.player.anims.play('fiji', true);
-        this.player.anims.play('violet', true);
+        // this.player.anims.play('fiji', true);
+        // this.player.anims.play('violet', true);
         this.player.anims.play('tangy', true);
     }
     // jump 
