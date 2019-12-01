@@ -49,6 +49,8 @@ preload() {
     this.load.audio('lvl1_bgmusic','assets/audio/lvl1.mp3');
     this.load.audio('lvl1_drop','assets/audio/drop2.mp3');
 
+    //invisible thingy
+    this.load.image('invisible','assets/invisible-thingy.png');
 }
 
 create() {
@@ -60,7 +62,7 @@ create() {
     this.jumpSnd = this.sound.add('jump');
     this.collectSnd = this.sound.add('collect');
 
-    this.lvl1_dropSnd = this.sound.add('lvl1_drop');
+    this.lvl1_dropSnd = this.sound.add('lvl1_drop'),{volume: 100};
     this.lvl1_bgmusicSnd = this.sound.add('lvl1_bgmusic');
 
     this.lvl1_bgmusicSnd.play();
@@ -167,6 +169,25 @@ create() {
         setXY: { x: 2100, y: -100 }
         });
 
+    // this. = this.physics.add.group({
+    //     key:'invisi',
+    //     setXY: { x:1900, y:220 }
+    //     });
+        
+    //     this.physics.add.collider(this.groundLayer, this.invisible);
+    //     this.physics.add.overlap(this.player, this.invisible, this.hitInvisi, null, this );
+
+    //     console.log('invisible guy', this.invisible)
+
+        this.invisibleguy = this.physics.add.group({
+            key:'snack3',
+            //repeat:5,
+            setXY: { x:1900, y:0 }
+            });
+        
+            this.physics.add.collider(this.groundLayer, this.invisibleguy);
+            this.physics.add.overlap(this.player, this.invisibleguy, this.hitInvisi, null, this );
+
     // Add random stars
     // this.stars = this.physics.add.group({
     //     key: 'star',
@@ -177,14 +198,11 @@ create() {
     this.physics.add.overlap(this.player, this.weed, this.hitWeed, null, this );
     this.physics.add.overlap(this.player, this.rock, this.hitRock, null, this );
 
-    this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.dropSnack1, callbackScope: this, loop: true });
-    this.timedEvent2 = this.time.addEvent({ delay: 1000, callback: this.dropSnack2, callbackScope: this, loop: true });
-
     this.add.text(20,20, 'Hiking Day', { font: '21px Courier', fill: '#221C48' }).setScrollFactor(0);
     this.add.text(160,20, '05:02 PM', { font: '21px Courier', fill: '#221C48' }).setScrollFactor(0);
 
     // this text will show the score
-    this.snackText = this.add.text(20, 50, '0', {
+    this.snackText = this.add.text(20, 50, '0'+'/5', {
         fontSize: '30px',
         fill: '#221C48'
     });
@@ -222,7 +240,7 @@ collectsnack3(player, snacks3) {
     snacks3.disableBody(true, true);
     this.snackCount += 1; // add 10 points to the score
     console.log(this.snackCount);
-    this.snackText.setText(this.snackCount);
+    this.snackText.setText(this.snackCount+'/5');
     this.collectSnd.play();  // set the text to show the current score
     return false;
 }
@@ -231,9 +249,62 @@ collectsnack4(player, snacks4) {
     snacks4.disableBody(true, true);
     this.snackCount += 1; // add 10 points to the score
     console.log(this.snackCount);
-    this.snackText.setText(this.snackCount);
+    this.snackText.setText(this.snackCount+'/5');
     this.collectSnd.play();  // set the text to show the current score
     return false;
+}
+
+hitWeed(player,weed) {
+    //bombs.disableBody(true, true);
+    console.log('Hit crab');
+    this.cameras.main.shake(20);
+    this.lvl1_dropSnd.play();
+    this.player.x -= this.player.width;
+    this.snackCount -= 1;
+    this.snackText.setText(this.snackCount+'/5');
+
+    // this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.dropSnack1, callbackScope: this, loop: true });
+    // this.timedEvent2 = this.time.addEvent({ delay: 1000, callback: this.dropSnack2, callbackScope: this, loop: true });
+
+    if (this.snackCount < 0) {
+        this.snackCount = 0;
+        this.lvl1_bgmusicSnd.stop();
+        this.lvl1_bgmusicSnd.loop = false;
+        this.scene.start("gameoverScene",  {currentLevel : 1});
+    }
+}
+
+hitRock(player,rock) {
+    //bombs.disableBody(true, true);
+    console.log('Hit crab');
+    this.cameras.main.shake(20);
+    this.lvl1_dropSnd.play();
+    this.player.x -= this.player.width;
+    this.snackCount -= 1;
+    this.snackText.setText(this.snackCount+'/5');
+
+    if (this.snackCount < 0) {
+        this.snackCount = 0;
+        this.lvl1_bgmusicSnd.stop();
+        this.lvl1_bgmusicSnd.loop = false;
+        this.scene.start("gameoverScene",  {currentLevel : 1});
+    }
+}
+
+hitInvisi(player,weed) {
+    // this.player.x = this.player.width;
+    // this.snackText.setText(this.snackCount+'/5');
+    //bombs.disableBody(true, true);
+    console.log('Hit invisi');
+    this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.dropSnack1, callbackScope: this, loop: true });
+        this.timedEvent2 = this.time.addEvent({ delay: 1000, callback: this.dropSnack2, callbackScope: this, loop: true });
+
+    // if ( this.snackCount >= 1 ) {
+
+    //     this.timedEvent;
+    //     this.timedEvent2;
+
+    // }
 }
 
 dropSnack1() {
@@ -251,43 +322,9 @@ dropSnack2() {
     console.log('Dropping snacks');
     this.snacks4Drop.createMultiple({
         key: 'snack4drop',
-        //repeat: 1,
+        //epeat: 1,
         setXY: { x: 2100, y: -130 }
     })
-}
-
-hitWeed(player,weed) {
-    //bombs.disableBody(true, true);
-    console.log('Hit crab');
-    this.cameras.main.shake(20);
-    this.lvl1_dropSnd.play();
-    this.player.x -= this.player.width;
-    this.snackCount -= 1;
-    this.snackText.setText(this.snackCount);
-
-    if (this.snackCount < 0) {
-        this.snackCount = 0;
-        this.lvl1_bgmusicSnd.stop();
-        this.lvl1_bgmusicSnd.loop = false;
-        this.scene.start("gameoverScene",  {currentLevel : 1});
-    }
-}
-
-hitRock(player,rock) {
-    //bombs.disableBody(true, true);
-    console.log('Hit crab');
-    this.cameras.main.shake(20);
-    this.lvl1_dropSnd.play();
-    this.player.x -= this.player.width;
-    this.snackCount -= 1;
-    this.snackText.setText(this.snackCount);
-
-    if (this.snackCount < 0) {
-        this.snackCount = 0;
-        this.lvl1_bgmusicSnd.stop();
-        this.lvl1_bgmusicSnd.loop = false;
-        this.scene.start("gameoverScene",  {currentLevel : 1});
-    }
 }
 
 update() {
@@ -336,13 +373,18 @@ update() {
     let x = this.endPoint.x - this.player.x;
     let y = this.endPoint.y - this.player.y;
 
-    console.log('player.x', this.player.x)
+    //console.log('player.x', this.player.x)
     
     //Check for reaching endPoint object
     if ( this.player.x >= this.endPoint.x && this.player.y >= this.endPoint.y ) {
         console.log('Reached endPoint, loading next level');
-        if ( this.snackCount > 10 ) {
+        if ( this.snackCount >= 1 ) {
             this.add.image(2000, 220,'lvl1_totem2').setOrigin(0,0);
+
+            // this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.dropSnack1, callbackScope: this, loop: true });
+            // this.timedEvent2 = this.time.addEvent({ delay: 1000, callback: this.dropSnack2, callbackScope: this, loop: true });
+
+            // console.log('drop snacks', this.timedEvent)
 
             // this.dropSnack1;
             // this.dropSnack2;
@@ -351,10 +393,11 @@ update() {
                 this.lvl1_bgmusicSnd.loop = false;
                 this.lvl1_bgmusicSnd.stop(); 
                 this.scene.stop("level1");
-                this.scene.start("level2");
+                this.scene.start("level2", {myPlayer : this.myPlayer});
             },[], this);
 
          } else {
+
             this.add.image(2000, 220,'lvl1_totem3').setOrigin(0,0);
             this.time.delayedCall(2000,function(){
             this.snackCount = 0;
