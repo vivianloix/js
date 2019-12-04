@@ -402,7 +402,7 @@ update() {
     // jump 
     if (this.space.isDown && this.player.body.onFloor())
     {
-        this.player.body.setVelocityY(-260);     
+        this.player.body.setVelocityY(-280);     
         this.jumpSnd.play();   
     }
 
