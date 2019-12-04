@@ -14,7 +14,7 @@ let config = {
         }
     },
     //scene: [mainScene, main2Scene, storyScene, story2Scene, level1]
-    scene: [mainScene, introScene, storyScene, story2Scene, story3Scene, story4Scene, story5Scene, story6Scene, story7Scene, level1, level2, level3, gameoverScene, endScene]
+    scene: [mainScene, introScene, characterScene, storyScene, story2Scene, story3Scene, story4Scene, story5Scene, story6Scene, story7Scene, level1, level2, level3, gameoverScene, endScene]
 
 
 };

@@ -42,6 +42,6 @@
   <object id="3" name="startPoint" x="128" y="384">
    <point/>
   </object>
-  <object id="11" name="endPoint" x="2086" y="370" width="108" height="48"/>
+  <object id="11" name="endPoint" x="1960" y="362" width="108" height="48"/>
  </objectgroup>
 </map>
