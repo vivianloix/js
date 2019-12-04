@@ -58,6 +58,8 @@ class mainScene extends Phaser.Scene {
         this.load.audio('lvl1_drop','assets/audio/drop2.mp3');
         this.load.audio('lvl2_bgmusic','assets/audio/lvl2.mp3');
         this.load.audio('lvl3_bgmusic','assets/audio/lvl3.mp3');
+        this.load.audio('endmusic','assets/audio/end.mp3');
+        this.load.audio('gameover_music','assets/audio/gameover.mp3');
     
         this.load.image('invisible','assets/invisible-thingy.png');
 
